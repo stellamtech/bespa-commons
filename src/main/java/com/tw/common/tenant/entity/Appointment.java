@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.hibernate.annotations.Where;
 
-import com.tw.common.entity.User;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -46,17 +44,9 @@ public class Appointment {
 
 	@Column(name = "appointment_time", nullable = false)
 	private LocalTime appointmentTime;
-
-	//@ManyToOne(fetch = FetchType.LAZY)
-	// @JoinColumn(name = "requested_therapist_id")
-	//private User requestedTherapist;
 	
 	@Column(name = "requested_therapist_id")
 	private Long requestedTherapistId;
-
-	//@ManyToOne(fetch = FetchType.LAZY)
-	// @JoinColumn(name = "user_id")
-	//private User assignedTherapist;
 	
 	@Column(name = "assigned_therapist_id")
 	private Long assignedTherapistId;

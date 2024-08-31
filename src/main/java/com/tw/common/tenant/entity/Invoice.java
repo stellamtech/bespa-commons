@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.hibernate.annotations.Where;
 
-import com.tw.common.entity.User;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,6 +48,10 @@ public class Invoice {
 
 	@Column(name = "deleted", nullable = false)
 	private Boolean deleted = false;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "payment_method_id")
+	private PaymentMethod paymentMethod;
 
 	@OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Tip> tip;
@@ -59,7 +61,7 @@ public class Invoice {
 	private Double subtotal;
 	private Integer discountPercentage;
 	private Double discountAmount;
-	private Double vat;
+	private Integer vatPercentage;
 	private Double vatAmount;
 	private Double total;
 	private Double previousDue;

@@ -9,7 +9,6 @@ import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tw.common.entity.User;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
@@ -21,9 +20,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
@@ -99,6 +96,7 @@ public class EServices implements Serializable {
 	private Categories categories;
 
 	@OneToMany(mappedBy = "eService", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<LevelPrice> levelPrices;
 
 //	@ManyToMany(fetch = FetchType.LAZY)
@@ -107,12 +105,11 @@ public class EServices implements Serializable {
 //	@JsonIgnore
 //	private List<User> user;
 	
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "user_eservices", 
 	     joinColumns = @JoinColumn(name = "eservices_id"))
 	@Column(name = "user_id")
 	private List<Long> user;
-
 
 	@PrePersist
 	protected void onCreate() {
