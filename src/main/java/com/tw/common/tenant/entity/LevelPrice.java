@@ -3,13 +3,20 @@ package com.tw.common.tenant.entity;
 
 import java.io.Serializable;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -32,8 +39,8 @@ public class LevelPrice implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
-	private String level;
+	@Column(name ="level", nullable = false)
+	private String levelName;
 
 	@Column(nullable = false)
 	private Double price;
@@ -41,6 +48,9 @@ public class LevelPrice implements Serializable {
 	@Column(name = "deleted", nullable = false)
 	private Boolean deleted = false;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "eService_id")
+	@JsonIgnore
+	@NotFound(action = NotFoundAction.IGNORE)
 	private EServices eService;
 }
