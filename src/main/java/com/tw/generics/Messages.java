@@ -18,9 +18,9 @@ public final class Messages {
 	public static final String USER_LIST = "These many users found";
 	public static final String USER_LIST_EMPTY = "No user found";
 	
-	public static final String CREATED_MSG = "created successfully!";
-	public static final String UPDATED_MSG = "updated successfully!";
-	
+	public static final String CREATED_MSG = "Created successfully!";
+	public static final String UPDATED_MSG = "Updated successfully!";
+	public static final String UPDATED_STATUS = "Status updated successfully!";
 	
 	public static final String USER_ACCESS_CREATED ="User Access created !";
 	public static final String MODULE_MASTER_ALREADY ="Module master already exists!";
@@ -28,6 +28,10 @@ public final class Messages {
 	
 	public static final String ADMISSION_AlREADY = "Admission with Student already Exist";
 	public static final String STATUS = "Status Changed Successfully";
-
-
+	public static final int NO_CONTENT=0;
+	public static final String NO_CONTENTS="No contents";
+	public static final String PAYMENT="Payment processed successfully";
+	public static final String DUE_PAYMENT="Due payment processed successfully";
+	public static final String COMMISSION="Commission split saved successfully";
+	
 }

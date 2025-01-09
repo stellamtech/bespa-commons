@@ -28,8 +28,10 @@ public class Payment {
     @JoinColumn(name = "payment_method_id", nullable = false)
     private PaymentMethod paymentMethod;
 
+    private String paymentNumber;
     private Double amount;
     private LocalDate paymentDate;
     private String note;
+    private String status;
 
 }

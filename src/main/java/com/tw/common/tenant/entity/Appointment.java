@@ -45,6 +45,12 @@ public class Appointment {
 	@Column(name = "appointment_time", nullable = false)
 	private LocalTime appointmentTime;
 	
+	@Column(name = "appointment_end_time", nullable = false)
+	private LocalTime appointmentEndTime;
+	
+	@Column(name = "token_id")
+	private String tokenId;
+	
 	@Column(name = "requested_therapist_id")
 	private Long requestedTherapistId;
 	
@@ -76,6 +82,6 @@ public class Appointment {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "appointment_services", joinColumns = {
-			@JoinColumn(name = "appointment_id") }, inverseJoinColumns = { @JoinColumn(name = "service_id") })
+	@JoinColumn(name = "appointment_id") }, inverseJoinColumns = { @JoinColumn(name = "service_id") })
 	private List<EServices> services;
 }

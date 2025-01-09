@@ -3,6 +3,7 @@ package com.tw.common.tenant.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -82,7 +83,7 @@ public class EServices implements Serializable {
 	@Column(name = "finish")
 	private int finish;
 
-	@Column(length = 16)
+	@Column(name = "totalServiceDuration")
 	private int totalServiceDuration;
 
 	@ManyToOne
@@ -98,12 +99,6 @@ public class EServices implements Serializable {
 	@OneToMany(mappedBy = "eService", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<LevelPrice> levelPrices;
-
-//	@ManyToMany(fetch = FetchType.LAZY)
-//	@JoinTable(name = "user_eservices", joinColumns = { @JoinColumn(name = "eservices_id") }, inverseJoinColumns = {
-//	@JoinColumn(name = "user_id") })
-//	@JsonIgnore
-//	private List<User> user;
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "user_eservices", 
@@ -115,4 +110,10 @@ public class EServices implements Serializable {
 	protected void onCreate() {
 		this.createdAt = new Timestamp(System.currentTimeMillis());
 	}
+	
+	@Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+	
 }

@@ -1,5 +1,7 @@
 package com.tw.common.tenant.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -28,10 +30,14 @@ public class PaymentMethod {
     
     public PaymentMethod() {}
 
-    // Constructor with parameters
     public PaymentMethod(String name, PaymentType type) {
         this.name = name;
         this.type = type;
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }

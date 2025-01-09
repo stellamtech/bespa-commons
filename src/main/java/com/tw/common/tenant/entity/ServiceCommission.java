@@ -1,7 +1,5 @@
 package com.tw.common.tenant.entity;
 
-import com.tw.common.entity.User;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

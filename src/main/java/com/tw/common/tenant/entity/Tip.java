@@ -1,8 +1,7 @@
 package com.tw.common.tenant.entity;
 
 import java.time.LocalDate;
-
-import com.tw.common.entity.User;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,22 +19,24 @@ import lombok.Data;
 @Table(name = "tip")
 public class Tip {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "invoice_id", nullable = false)
-    private Invoice invoice;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user;  // The stylist
-    
-    @Column(name = "user_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "invoice_id", nullable = false)
+	private Invoice invoice;
+
+	@Column(name = "user_id")
 	private Long userId;
 
-    private Double amount;
+	private Double amount;
 
-    private LocalDate date;
+	private LocalDate date;
+	
+	@Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+	
 }

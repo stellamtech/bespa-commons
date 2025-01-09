@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tw.generics.AbstractPersistable;
 import com.tw.generics.StatusType;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,7 +25,7 @@ import lombok.NoArgsConstructor;
 
 @SuppressWarnings("deprecation")
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -36,8 +37,6 @@ public class User extends AbstractPersistable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -51,13 +50,13 @@ public class User extends AbstractPersistable {
 	@Column(name = "fullname")
 	private String fullName;
 
-	@Column(name = "user_name" , nullable = false)
+	@Column(name = "user_name", nullable = false)
 	private String userName;
 
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "password" , nullable = false)
+	@Column(name = "password", nullable = false)
 	private String password;
 
 	@Column(name = "address")
@@ -71,16 +70,16 @@ public class User extends AbstractPersistable {
 
 	@Column(name = "join_date")
 	private Date joinDate;
-	
+
 	@Column(name = "status", nullable = true)
 	private String status = StatusType.Active.getValue();
-	
-	@ManyToMany(fetch = FetchType.LAZY)
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
-	@JoinColumn(name = "role_id") })
+			@JoinColumn(name = "role_id") })
 	@JsonIgnore
 	private List<Role> roles;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tenant_id", nullable = false)
 	private MasterTenant tenant;

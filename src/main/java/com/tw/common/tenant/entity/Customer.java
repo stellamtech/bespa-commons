@@ -3,6 +3,7 @@ package com.tw.common.tenant.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.annotations.Where;
 
@@ -12,8 +13,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -67,13 +66,14 @@ public class Customer implements Serializable {
 
 	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
 	private List<Appointment> appointments;
-	
-//	@OneToOne
+
+//	@ManyToOne
 //	@JoinColumn(name = "membership_id")
 //	private Membership membership;
 	
-	@ManyToOne
-    @JoinColumn(name = "membership_id")
-    private Membership membership;
+	@Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
 }
