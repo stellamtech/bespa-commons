@@ -80,7 +80,7 @@ public class User extends AbstractPersistable {
 	@JsonIgnore
 	private List<Role> roles;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tenant_id", nullable = false)
 	private MasterTenant tenant;
 
