@@ -19,28 +19,40 @@ import jakarta.persistence.Transient;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractPersistable implements IEntity<Long>, Cloneable {
-	
+
 	private static final long serialVersionUID = 7660632849184900495L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long id;
-	
+
 	@Column(name = "created", nullable = false)
 	@CreatedDate
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar created;
-	
+
 	@Column(name = "modified", nullable = false)
 	@LastModifiedDate
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar modified;
-	
+
 	@Column(name = "deleted", nullable = false)
 	private Boolean deleted = false;
 
-	@Override
+//	@CreatedBy
+//	@ManyToOne // Important: ManyToOne relationship
+//	@JoinColumn(name = "created_by_user_id") // Specify the foreign key column
+//	@NotFound(action = NotFoundAction.IGNORE)
+//	private User createdBy;
+
+//	@LastModifiedBy
+//	@ManyToOne // Important: ManyToOne relationship
+//	@JoinColumn(name = "updated_by_user_id") // Specify the foreign key column
+//	@NotFound(action = NotFoundAction.IGNORE)
+//	private User updatedBy;
+
+//	@Override
 	public Long getId() {
 		return id;
 	}
@@ -54,7 +66,7 @@ public abstract class AbstractPersistable implements IEntity<Long>, Cloneable {
 	public boolean isNew() {
 		return this.id == null;
 	}
-	
+
 	public Boolean getDeleted() {
 		return deleted;
 	}
@@ -83,27 +95,32 @@ public abstract class AbstractPersistable implements IEntity<Long>, Cloneable {
 	public String toString() {
 		return String.format("Entity of type %s with rowID: %s", this.getClass().getName(), getId());
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) { return false; }
-		if (this == obj) { return true; }
-		if (!getClass().equals(obj.getClass())) { return false; }
+		if (obj == null) {
+			return false;
+		}
+		if (this == obj) {
+			return true;
+		}
+		if (!getClass().equals(obj.getClass())) {
+			return false;
+		}
 		AbstractPersistable rhs = (AbstractPersistable) obj;
 		return this.id == null ? false : this.id.equals(rhs.id);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		int hashCode = 17;
 		hashCode += (this.id == null) ? 0 : this.id.hashCode() * 31;
 		return hashCode;
 	}
-	
+
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
-	
-}
 
+}

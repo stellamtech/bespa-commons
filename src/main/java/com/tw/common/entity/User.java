@@ -83,6 +83,10 @@ public class User extends AbstractPersistable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tenant_id", nullable = false)
 	private MasterTenant tenant;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "branch_id", nullable = false)
+	private Branch branch;
 
 	public User(String userName, String password) {
 		super();

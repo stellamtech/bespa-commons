@@ -48,7 +48,22 @@ public class MasterTenant extends AbstractPersistable {
 
 	@Column(name = "status", nullable = false)
 	private String status;
+	
+	@Column(name = "alias_name", nullable = false)
+	private String aliasName;
+	
+	@Column(name = "first_mobile_no", nullable = false, unique = true)
+	private String firstMobileNo;
+	
+	@Column(name = "second_mobile_no", unique = true)
+	private String secondMobileNo;
 
+	@Column(name = "gst_no")
+	private String gstNo;
+	
+	@Column(name = "address", nullable = false)
+	private String address;
+	
 	@Column(name = "tenant_id")
 	private Integer tenantId;
 

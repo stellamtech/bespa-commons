@@ -1,18 +1,15 @@
 package com.tw.common.tenant.entity;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 import org.hibernate.annotations.Where;
+
+import com.tw.generics.AbstractPersistable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -26,14 +23,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Where(clause = "deleted=false")
-public class Customer implements Serializable {
+public class Customer extends AbstractPersistable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(unique = true, nullable = false)
-	private Long id;
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(unique = true, nullable = false)
+//	private Long id;
 
 	@Column(nullable = false)
 	private String firstName;
@@ -67,13 +64,9 @@ public class Customer implements Serializable {
 	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
 	private List<Appointment> appointments;
 
-//	@ManyToOne
-//	@JoinColumn(name = "membership_id")
-//	private Membership membership;
-	
-	@Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+//	@Override
+//    public int hashCode() {
+//        return Objects.hash(id);
+//    }
 
 }

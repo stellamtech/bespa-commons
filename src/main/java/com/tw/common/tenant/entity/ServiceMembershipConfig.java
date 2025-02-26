@@ -42,11 +42,16 @@ public class ServiceMembershipConfig extends AbstractPersistable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id", nullable = false)
 	private Categories category;
+	
+	private Integer quantity;
 
 	@Column(name = "started", nullable = false)
 	private LocalDate started;
 
 	@Column(name = "ended", nullable = false)
 	private LocalDate ended;
+	
+	@Column(name = "validity", nullable = false)
+	private Integer validity;
 
 }
